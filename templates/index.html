@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Podcast Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Podcast Name Generator</h1>
+    <form method="post" class="form">
+      <label for="description" class="label">Describe your podcast concept</label>
+      <textarea id="description" name="description" placeholder="e.g., Interviews with startup founders about growth tactics and failures">{{ request.form.description or '' }}</textarea>
+
+      <div class="actions">
+        <button type="submit" name="action" value="one_word" class="btn primary">Generate 1‑Word Names</button>
+        <button type="submit" name="action" value="two_words" class="btn secondary">Generate 2‑Word Names</button>
+      </div>
+    </form>
+
+    {% if result %}
+      <h2 class="subheading">Suggestions ({{ action.replace('_', ' ') }})</h2>
+      <textarea class="result" readonly>{{ result }}</textarea>
+    {% endif %}
+  </div>
+</body>
+</html>
